@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/license-MIT-1f6feb?style=for-the-badge"/>
 </p>
 
-<sub><i>The smallest repo that takes you from "what is a noise schedule" to a working classifier-free-guided sampler — without skipping the math.</i></sub>
+<sub><i>The smallest repo that takes you from "what is a noise schedule" to a working classifier-free-guided sampler · without skipping the math.</i></sub>
 
 </div>
 
@@ -24,13 +24,13 @@
 
 ## Why this repo exists
 
-Diffusion is the most consequential generative paradigm of the decade and most engineers know it as a black box behind a `pipe(prompt)` call. This repo derives it from scratch — forward process, score / ε-prediction parameterization, classifier-free guidance, DDIM sampler — and trains a small UNet on CIFAR-10 and CelebA, with sample grids checked in.
+Diffusion is the most consequential generative paradigm of the decade and most engineers know it as a black box behind a `pipe(prompt)` call. This repo derives it from scratch · forward process, score / ε-prediction parameterization, classifier-free guidance, DDIM sampler · and trains a small UNet on CIFAR-10 and CelebA, with sample grids checked in.
 
 > **Status:** scaffolding the noise schedule and forward process. First milestone: produce non-garbage CIFAR-10 samples.
 
 ## The math (in one screen)
 
-**Forward process** — gradually destroy the signal:
+**Forward process** · gradually destroy the signal:
 
 $$
 q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}\, x_{t-1},\ \beta_t I)
@@ -38,14 +38,14 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}\, x_{t-1},\ \beta_t I)
 x_t = \sqrt{\bar\alpha_t}\, x_0 + \sqrt{1-\bar\alpha_t}\, \varepsilon
 $$
 
-**Reverse process** — learn ε with a UNet, denoise step by step:
+**Reverse process** · learn ε with a UNet, denoise step by step:
 
 $$
 \mathcal{L}(\theta) = \mathbb{E}_{x_0, \varepsilon, t}
 \left[\, \lVert \varepsilon - \varepsilon_\theta(x_t, t) \rVert^2 \,\right]
 $$
 
-**Classifier-free guidance** — at sample time, blend conditional and unconditional ε:
+**Classifier-free guidance** · at sample time, blend conditional and unconditional ε:
 
 $$
 \tilde\varepsilon_\theta(x_t, c) = (1+w)\,\varepsilon_\theta(x_t, c) - w\,\varepsilon_\theta(x_t, \emptyset)
@@ -124,12 +124,12 @@ uv run eval_fid.py --ckpt out/cifar10/ema.pt
 
 ## Inspiration & required reading
 
-- [Lilian Weng — *What are diffusion models?*](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/) — single best derivation
-- [lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch) — the reference implementation
-- [Ho et al. — DDPM (2020)](https://arxiv.org/abs/2006.11239)
-- [Song et al. — DDIM (2021)](https://arxiv.org/abs/2010.02502)
-- [Ho & Salimans — Classifier-free guidance (2022)](https://arxiv.org/abs/2207.12598)
-- [Karras et al. — *Elucidating the design space of diffusion models* (EDM)](https://arxiv.org/abs/2206.00364)
+- [Lilian Weng · *What are diffusion models?*](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/) · single best derivation
+- [lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch) · the reference implementation
+- [Ho et al. · DDPM (2020)](https://arxiv.org/abs/2006.11239)
+- [Song et al. · DDIM (2021)](https://arxiv.org/abs/2010.02502)
+- [Ho & Salimans · Classifier-free guidance (2022)](https://arxiv.org/abs/2207.12598)
+- [Karras et al. · *Elucidating the design space of diffusion models* (EDM)](https://arxiv.org/abs/2206.00364)
 
 ---
 
