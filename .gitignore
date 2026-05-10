@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ML artifacts
+*.pt
+*.pth
+*.bin
+*.safetensors
+out/
+runs/
+wandb/
+samples/local/
+data/raw/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
